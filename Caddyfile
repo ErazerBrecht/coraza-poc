@@ -1,0 +1,16 @@
+{
+    order coraza_waf first
+}
+
+:80 {
+ coraza_waf {
+  load_owasp_crs
+  directives `
+   Include /opt/coraza/config/coraza.conf
+   Include /opt/coraza/config/crs-setup.conf
+   Include /opt/coraza/config/REQUEST-900-EXCLUSION-RULES-BEFORE-CRS.conf
+   Include @owasp_crs/*.conf
+   Include /opt/coraza/config/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf
+  `
+ }
+}
